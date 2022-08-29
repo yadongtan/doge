@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="doge-rpc" />
+        <module name="doge-test-api-commons" />
+        <module name="doge-test-consumer" />
+        <module name="doge-registry" />
+        <module name="doge-test-provider-2" />
+        <module name="doge-test-provider-1" />
+        <module name="doge-remoting" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="doge-registry" options="-parameters" />
+      <module name="doge-remoting" options="-parameters" />
+      <module name="doge-rpc" options="-parameters" />
+      <module name="doge-test-api-commons" options="-parameters" />
+      <module name="doge-test-consumer" options="-parameters" />
+      <module name="doge-test-provider-1" options="-parameters" />
+      <module name="doge-test-provider-2" options="-parameters" />
+    </option>
+  </component>
+</project>
