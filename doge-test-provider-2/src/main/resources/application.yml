@@ -1,2 +1,10 @@
 server:
   port: 18081
+
+doge:
+  zookeeper:
+    host: xxx.xxx.xxx.xxx
+    port: 3379
+  server:
+    port: 20002
+

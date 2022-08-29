@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="doge-rpc" />
         <module name="doge-test-api-commons" />
+        <module name="doge-config" />
         <module name="doge-test-consumer" />
         <module name="doge-registry" />
         <module name="doge-test-provider-2" />
@@ -18,6 +19,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="doge-config" options="-parameters" />
       <module name="doge-registry" options="-parameters" />
       <module name="doge-remoting" options="-parameters" />
       <module name="doge-rpc" options="-parameters" />
