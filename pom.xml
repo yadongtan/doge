@@ -16,6 +16,7 @@
         <module>doge-remoting</module>
         <module>doge-registry</module>
         <module>doge-config</module>
+        <module>doge-utils</module>
     </modules>
     <packaging>pom</packaging>
 

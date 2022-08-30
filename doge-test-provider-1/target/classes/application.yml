@@ -2,9 +2,28 @@ server:
   port: 18080
 
 doge:
+  registry: redis #option
   zookeeper:
-    host: xxx.xxx.xxx.xxx
-    port: 3379
+    host: 120.26.76.100 #must
+    port: 2181
+    connection-timeout: 60000
+    session-timeout: 60000
+    retry-sleep-time: 5000
+    max-retries: 5
   server:
-    port: 20001
+    port: 20001 #must
+
+spring:
+  redis:
+    database: 0
+    host: r-bp1fo4mh3prhp0du3ypd.redis.rds.aliyuncs.com
+    port: 6379
+    timeout: 10s
+    password: 2209931449Qq
+    jedis:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: -1m
 

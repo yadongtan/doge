@@ -1,2 +1,13 @@
+
+
+doge:
+  zookeeper:
+    host: 120.26.76.100
+    port: 2181
+    connection-timeout: 60000
+    session-timeout: 60000
+    retry-sleep-time: 5000
+    max-retries: 5
+
 server:
   port: 8080

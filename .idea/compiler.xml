@@ -10,6 +10,7 @@
         <module name="doge-test-api-commons" />
         <module name="doge-config" />
         <module name="doge-test-consumer" />
+        <module name="doge-utils" />
         <module name="doge-registry" />
         <module name="doge-test-provider-2" />
         <module name="doge-test-provider-1" />
@@ -27,6 +28,7 @@
       <module name="doge-test-consumer" options="-parameters" />
       <module name="doge-test-provider-1" options="-parameters" />
       <module name="doge-test-provider-2" options="-parameters" />
+      <module name="doge-utils" options="-parameters" />
     </option>
   </component>
 </project>

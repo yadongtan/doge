@@ -3,8 +3,12 @@ server:
 
 doge:
   zookeeper:
-    host: xxx.xxx.xxx.xxx
-    port: 3379
+    host: 120.26.76.100 #must
+    port: 2181
+    connection-timeout: 60000
+    session-timeout: 60000
+    retry-sleep-time: 5000
+    max-retries: 5
   server:
-    port: 20002
+    port: 20002 #must
 
