@@ -36,6 +36,27 @@ public class NameGenerateUtils {
         return builder.toString();
     }
 
+    public static String generateZkNodePath(Method method, Object object){
+        StringBuilder builder = new StringBuilder();
+        // 只传入接口类型, 接口方法
+        // 返回 父接口类名#方法名#arg1.arg2.arg3 -- 方法
+        String interfaceName;
+        Class<?>[] interfaces = object.getClass().getInterfaces();
+        if(interfaces.length != 0){
+            interfaceName = interfaces[0].getName();
+        }else{
+            interfaceName = object.getClass().getName();
+        }
+        builder.append("/").append(interfaceName).append("/");
+        builder.append(method.getName());
+        logger.info("生成key:" + builder.toString());
+        return builder.toString();
+    }
+
+    public static String generateRedisPath(Method method, Object object){
+        return NameGenerateUtils.generateZkNodePath(method, object);
+    }
+
     public static String generateMethodMapKey(Method method, String interfaceName){
         StringBuilder builder = new StringBuilder();
         // 只传入接口类型, 接口方法

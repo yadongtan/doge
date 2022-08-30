@@ -1,0 +1,9 @@
+/doge-test-provider-1/target/
+/doge-test-provider-2/target/
+/doge-test-consumer/target/
+/doge-config/target/
+/doge-registry/target/
+/doge-remoting/target/
+/doge-rpc/target/
+/doge-test-api-commons/target/
+/doge-utils/target/

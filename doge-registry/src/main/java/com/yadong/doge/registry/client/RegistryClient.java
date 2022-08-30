@@ -1,6 +1,7 @@
 package com.yadong.doge.registry.client;
 
 import java.lang.reflect.Method;
+import java.util.List;
 
 /**
 * @author YadongTan
@@ -9,5 +10,5 @@ import java.lang.reflect.Method;
 */
 public interface RegistryClient {
     public boolean registry(Method method, Object obj, HostInfo info);
-    public HostInfo getHost(Method method, Object obj);
+    public List<HostInfo> getHost(Method method, Object obj);
 }

@@ -2,6 +2,7 @@ server:
   port: 18081
 
 doge:
+  registry: redis
   zookeeper:
     host: 120.26.76.100 #must
     port: 2181
@@ -11,4 +12,20 @@ doge:
     max-retries: 5
   server:
     port: 20002 #must
+
+
+spring:
+  redis:  # must if use redis
+    database: 0
+    host: r-bp1fo4mh3prhp0du3ypd.redis.rds.aliyuncs.com
+    port: 6379
+    timeout: 10s
+    password: 2209931449Qq
+    jedis:
+      pool:
+        min-idle: 0
+        max-idle: 8
+        max-active: 8
+        max-wait: -1m
+
 

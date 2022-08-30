@@ -14,7 +14,7 @@ doge:
     port: 20001 #must
 
 spring:
-  redis:
+  redis:  # must if use redis
     database: 0
     host: r-bp1fo4mh3prhp0du3ypd.redis.rds.aliyuncs.com
     port: 6379

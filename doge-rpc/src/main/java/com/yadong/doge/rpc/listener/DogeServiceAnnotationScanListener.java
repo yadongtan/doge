@@ -57,6 +57,7 @@ public class DogeServiceAnnotationScanListener implements ApplicationListener<Co
                 for (Method method : obj.getClass().getDeclaredMethods()) {
                     invokersMap.put(method, obj);
                     registryClient.registry(method, obj, info);
+                    registryClient.getHost(method, obj);
                 }
             });
         }).start();

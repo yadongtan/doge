@@ -7,6 +7,8 @@ import org.apache.curator.framework.CuratorFramework;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 
 /**
  * zk工具类 curator
@@ -30,6 +32,17 @@ public class ZkCuratorUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public List<String> getChildNode(String path){
+        try{
+            if(client.checkExists().forPath(path) != null){
+                return client.getChildren().forPath(path);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     //删除节点
