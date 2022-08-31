@@ -1,6 +1,7 @@
 package com.yadong.doge.rpc.invoker;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yadong.doge.registry.client.zookeeper.ZookeeperRegistryClient;
 import com.yadong.doge.utils.NameGenerateUtils;
 import com.yadong.doge.utils.ObjectMapperUtil;
 import org.slf4j.Logger;

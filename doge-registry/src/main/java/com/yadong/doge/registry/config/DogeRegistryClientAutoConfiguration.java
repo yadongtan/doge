@@ -11,6 +11,7 @@ import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -50,7 +51,9 @@ public class DogeRegistryClientAutoConfiguration {
                     .connectionTimeoutMs(zookeeperProperties.getConnectionTimeout())
                     .sessionTimeoutMs(zookeeperProperties.getSessionTimeout())
                     .retryPolicy(policy).build();
-            //3、启动客户端
+            // 3、解决 SASL config status: Will not attempt to authenticate using SASL (unknown error) 错误
+            System.setProperty("zookeeper.sasl.client", "false");
+            // 4、启动客户端
             client.start();
             logger.info("zookeeper启动成功，获取到客户端链接");
             return client;
@@ -67,6 +70,8 @@ public class DogeRegistryClientAutoConfiguration {
         public ZookeeperRegistryClient zookeeperRegistryClient(ZkCuratorUtil zkCuratorUtil){
             return new ZookeeperRegistryClient(zkCuratorUtil);
         }
+
+
     }
 
     // 用户必须指定doge.registry = redis, 才会采用redis作为配置中心并配置redis客户端
@@ -102,6 +107,8 @@ public class DogeRegistryClientAutoConfiguration {
         public RedisRegistryClient redisRegistryClient(RedisUtil redisUtil){
             return new RedisRegistryClient(redisUtil);
         }
+
+
     }
 
 
