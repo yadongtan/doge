@@ -1,4 +1,4 @@
-package com.yadong.doge.exception;
+package com.yadong.doge.config.exception;
 
 public class PropertiesException extends RuntimeException{
 

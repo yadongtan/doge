@@ -1,15 +1,11 @@
 package com.yadong.doge.config;
 
-import com.fasterxml.jackson.databind.exc.PropertyBindingException;
-import com.yadong.doge.exception.PropertiesException;
+import com.yadong.doge.config.exception.PropertiesException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import javax.annotation.PostConstruct;
-import javax.validation.constraints.NotNull;
 
 @ConfigurationProperties(prefix = "doge.zookeeper")
 public class ZookeeperProperties {

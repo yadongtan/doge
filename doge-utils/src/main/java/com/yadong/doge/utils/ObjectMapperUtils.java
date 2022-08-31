@@ -3,7 +3,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.util.StringUtils;
 
-public class ObjectMapperUtil {
+public class ObjectMapperUtils {
 
 
     private static final ObjectMapper MAPPER = new ObjectMapper();

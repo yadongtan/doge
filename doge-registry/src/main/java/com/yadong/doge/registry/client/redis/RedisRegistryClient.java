@@ -4,7 +4,7 @@ import com.yadong.doge.registry.config.HostInfo;
 import com.yadong.doge.registry.client.RegistryClient;
 import com.yadong.doge.registry.utils.RedisUtil;
 import com.yadong.doge.utils.NameGenerateUtils;
-import com.yadong.doge.utils.ObjectMapperUtil;
+import com.yadong.doge.utils.ObjectMapperUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +26,7 @@ public class RedisRegistryClient implements RegistryClient {
     @Override
     public boolean registry(Method method, Object obj, HostInfo info) {
         logger.info("[Redis] 发起注册, 方法:" + method + "###对象:" + obj + "###(" + info.getHost() + ":" + info.getPort() + ")");
-        redisUtil.lSet(NameGenerateUtils.generateRedisPath(method, obj), ObjectMapperUtil.toJSON(info));
+        redisUtil.lSet(NameGenerateUtils.generateRedisPath(method, obj), ObjectMapperUtils.toJSON(info));
         return true;
     }
 
@@ -39,7 +39,7 @@ public class RedisRegistryClient implements RegistryClient {
         }
         List<HostInfo> hostInfos = new ArrayList<>(list.size());
         for (Object hi : list) {
-            HostInfo hostInfo = ObjectMapperUtil.toObject(hi.toString(), HostInfo.class);
+            HostInfo hostInfo = ObjectMapperUtils.toObject(hi.toString(), HostInfo.class);
                 hostInfos.add(hostInfo);
         }
         for (HostInfo hostInfo : hostInfos) {

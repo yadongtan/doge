@@ -1,4 +1,4 @@
-package com.yadong.doge.stater;
+package com.yadong.doge.config.stater;
 
 import com.yadong.doge.config.ConsumerProperties;
 import com.yadong.doge.config.ProviderProperties;

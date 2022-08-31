@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.yadong.doge.stater.DogeAutoConfigurationStarter
+  com.yadong.doge.config.stater.DogeAutoConfigurationStarter

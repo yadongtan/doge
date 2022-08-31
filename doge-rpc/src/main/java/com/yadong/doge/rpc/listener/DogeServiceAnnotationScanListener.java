@@ -5,7 +5,8 @@ import com.yadong.doge.config.ProviderProperties;
 import com.yadong.doge.registry.config.HostInfo;
 import com.yadong.doge.registry.client.RegistryClient;
 import com.yadong.doge.rpc.annotation.DogeService;
-import com.yadong.doge.rpc.invoker.InvokersMap;
+import com.yadong.doge.rpc.invoker.RpcMethodObjectMap;
+import com.yadong.doge.rpc.netty.provider.NettyRpcServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -35,7 +36,6 @@ public class DogeServiceAnnotationScanListener implements ApplicationListener<Co
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         //扫描
         ApplicationContext applicationContext = contextRefreshedEvent.getApplicationContext();
-        InvokersMap invokersMap = applicationContext.getBean(InvokersMap.class);
         Map<String, Object> beansWithAnnotation = applicationContext.getBeansWithAnnotation(DogeService.class);
         if(beansWithAnnotation.isEmpty()){
             return;         //如果没有要暴露的服务,那么不用执行后面的操作了
@@ -51,9 +51,12 @@ public class DogeServiceAnnotationScanListener implements ApplicationListener<Co
         //新线程,注册可能比较耗时, 不影响主线程继续执行Spring
         HostInfo info = hostInfo;
         new Thread(() -> {
+            if(!beansWithAnnotation.isEmpty()){
+                NettyRpcServer.getInstance().start(applicationContext.getBean(ProviderProperties.class));
+            }
             beansWithAnnotation.forEach((key, obj) ->{
+                RpcMethodObjectMap.getInstance().addInvokerMethod(obj);
                 for (Method method : obj.getClass().getDeclaredMethods()) {
-                    invokersMap.put(method, obj);
                     registryClient.registry(method, obj, info);
                     registryClient.getHost(method, obj);
                 }

@@ -32,7 +32,7 @@ public class ZookeeperRegistryClient implements RegistryClient {
     public List<HostInfo> getHost(Method method, Object obj) {
         logger.info("[Zookeeper] 获取节点信息, 方法:" + method + "###对象:" + obj);
         List<String> childNode = zkCuratorUtil.getChildNode(NameGenerateUtils.generateZkNodePath(method, obj));
-        childNode.forEach(System.out::println);
+        // childNode.forEach(System.out::println);
         List<HostInfo> hostInfos = new LinkedList<>();
         for (String hi : childNode) {
             hostInfos.add(new HostInfo(hi.substring(0, hi.indexOf(":")), Integer.parseInt(hi.substring(hi.indexOf(":") + 1, hi.length()))));
