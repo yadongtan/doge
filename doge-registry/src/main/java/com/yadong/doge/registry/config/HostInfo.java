@@ -1,4 +1,4 @@
-package com.yadong.doge.registry.client;
+package com.yadong.doge.registry.config;
 
 /**
 * @author YadongTan

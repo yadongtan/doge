@@ -69,4 +69,14 @@ public class NameGenerateUtils {
         logger.info("生成key:" + builder.toString());
         return builder.toString();
     }
+
+    public static String generateMethodMapKey(Method method, Class<?> Class) {
+        //如果是接口,
+        if (Class.isInterface()) {
+            return generateMethodMapKey(method, Class.getName());
+        }else{
+            return generateMethodMapKey(method, Class.getGenericInterfaces()[0]);
+        }
+
+    }
 }

@@ -1,5 +1,7 @@
 package com.yadong.doge.registry.client;
 
+import com.yadong.doge.registry.config.HostInfo;
+
 import java.lang.reflect.Method;
 import java.util.List;
 

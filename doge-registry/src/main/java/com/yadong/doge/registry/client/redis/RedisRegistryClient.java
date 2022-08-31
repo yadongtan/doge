@@ -1,20 +1,19 @@
-package com.yadong.doge.registry.client;
+package com.yadong.doge.registry.client.redis;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yadong.doge.registry.config.HostInfo;
+import com.yadong.doge.registry.client.RegistryClient;
 import com.yadong.doge.registry.utils.RedisUtil;
 import com.yadong.doge.utils.NameGenerateUtils;
 import com.yadong.doge.utils.ObjectMapperUtil;
-import org.apache.curator.framework.CuratorFramework;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
-public class RedisRegistryClient implements RegistryClient{
+public class RedisRegistryClient implements RegistryClient {
 
     private static final Logger logger = LoggerFactory.getLogger(RedisRegistryClient.class);
 

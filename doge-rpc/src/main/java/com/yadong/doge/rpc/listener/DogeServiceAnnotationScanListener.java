@@ -2,13 +2,12 @@ package com.yadong.doge.rpc.listener;
 
 
 import com.yadong.doge.config.ProviderProperties;
-import com.yadong.doge.registry.client.HostInfo;
+import com.yadong.doge.registry.config.HostInfo;
 import com.yadong.doge.registry.client.RegistryClient;
 import com.yadong.doge.rpc.annotation.DogeService;
 import com.yadong.doge.rpc.invoker.InvokersMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -16,7 +15,6 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.security.Provider;
 import java.util.Map;
 
 /**
@@ -61,6 +59,6 @@ public class DogeServiceAnnotationScanListener implements ApplicationListener<Co
                 }
             });
         }).start();
-
     }
+
 }

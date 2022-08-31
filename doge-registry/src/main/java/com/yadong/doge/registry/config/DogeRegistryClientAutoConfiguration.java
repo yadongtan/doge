@@ -2,8 +2,8 @@ package com.yadong.doge.registry.config;
 
 
 import com.yadong.doge.config.ZookeeperProperties;
-import com.yadong.doge.registry.client.RedisRegistryClient;
-import com.yadong.doge.registry.client.ZookeeperRegistryClient;
+import com.yadong.doge.registry.client.redis.RedisRegistryClient;
+import com.yadong.doge.registry.client.zookeeper.ZookeeperRegistryClient;
 import com.yadong.doge.registry.utils.RedisUtil;
 import com.yadong.doge.registry.utils.ZkCuratorUtil;
 import org.apache.curator.framework.CuratorFramework;

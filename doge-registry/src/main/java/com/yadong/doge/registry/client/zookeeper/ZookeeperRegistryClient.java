@@ -1,7 +1,7 @@
-package com.yadong.doge.registry.client;
+package com.yadong.doge.registry.client.zookeeper;
 
-import com.sun.org.apache.xalan.internal.xsltc.compiler.util.NamedMethodGenerator;
-import com.sun.xml.internal.bind.v2.util.CollisionCheckStack;
+import com.yadong.doge.registry.config.HostInfo;
+import com.yadong.doge.registry.client.RegistryClient;
 import com.yadong.doge.registry.utils.ZkCuratorUtil;
 import com.yadong.doge.utils.NameGenerateUtils;
 import org.slf4j.Logger;
@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ZookeeperRegistryClient implements RegistryClient{
+public class ZookeeperRegistryClient implements RegistryClient {
 
     private static final Logger logger = LoggerFactory.getLogger(ZookeeperRegistryClient.class);
     private final ZkCuratorUtil zkCuratorUtil;

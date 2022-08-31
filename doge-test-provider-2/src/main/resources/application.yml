@@ -2,7 +2,7 @@ server:
   port: 18081
 
 doge:
-  registry: redis
+  registry: zookeeper
   zookeeper:
     host: 120.26.76.100 #must
     port: 2181
