@@ -1,6 +1,7 @@
 package com.yadong.doge.rpc.invoker;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yadong.doge.utils.NameGenerateUtils;
 import com.yadong.doge.utils.ObjectMapperUtils;
 
@@ -18,10 +19,21 @@ public class Invoker {
 
     private String key;
     private Object[] args;
+    @JsonIgnore
+    private Method method;
 
-    public Invoker(Class<?> targetClass, Method method, Object[] args){
+    public Invoker(Class<?> targetClass, Method method, Object[] args) {
+        this.method = method;
         key = NameGenerateUtils.generateMethodMapKey(method, targetClass);
         this.args = args;
+    }
+
+    public Method getMethod() {
+        return method;
+    }
+
+    public void setMethod(Method method) {
+        this.method = method;
     }
 
     public String getKey() {

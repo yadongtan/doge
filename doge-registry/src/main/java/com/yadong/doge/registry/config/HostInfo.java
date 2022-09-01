@@ -22,6 +22,10 @@ public class HostInfo {
         hostData = new HostData();
     }
 
+    public String getHostAndPort(){
+        return host + ":" + port;
+    }
+
     public String getHost() {
         return host;
     }
