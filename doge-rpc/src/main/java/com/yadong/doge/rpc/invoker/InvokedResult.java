@@ -4,10 +4,20 @@ public class InvokedResult {
 
     private String className;   //执行返回结果的类型
     private String obj; //  执行返回的结果 json格式
+    private Integer lockId;     // 线程id
 
-    public InvokedResult(String className, String obj){
+    public InvokedResult(String className, String obj, Integer lockId){
         this.className = className;
         this.obj = obj;
+        this.lockId = lockId;
+    }
+
+    public Integer getLockId() {
+        return lockId;
+    }
+
+    public void setLockId(int lockId) {
+        this.lockId = lockId;
     }
 
     public InvokedResult(){}
@@ -33,7 +43,8 @@ public class InvokedResult {
     public String toString() {
         return "InvokedResult{" +
                 "className='" + className + '\'' +
-                ", obj=" + obj.toString() +
+                ", obj='" + obj + '\'' +
+                ", lockId=" + lockId +
                 '}';
     }
 }

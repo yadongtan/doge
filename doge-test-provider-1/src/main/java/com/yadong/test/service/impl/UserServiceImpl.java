@@ -1,11 +1,19 @@
 package com.yadong.test.service.impl;
 
+import com.yadong.doge.config.ProviderProperties;
 import com.yadong.doge.rpc.annotation.DogeService;
 import entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import service.UserService;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 @DogeService
 public class UserServiceImpl implements UserService {
+
+    @Autowired
+    ProviderProperties properties;
 
     @Override
     public User getUserInfo(String username) {
@@ -17,6 +25,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String loginUser(String username, String password) {
-        return "用户["+ username + "]登录成功";
+        try {
+            return InetAddress.getLocalHost().getHostAddress()+ ":" + properties.getPort() +"]用户[" + username + "]登录成功";
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

@@ -9,7 +9,11 @@ import java.awt.event.KeyEvent;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-
+/**
+* @author YadongTan
+* @date 2022/9/1 15:45
+* @Description 服务提供者来找对应的方法进行调用并返回给消费者的map
+*/
 public class RpcMethodObjectMap {
 
     private static final Logger logger = LoggerFactory.getLogger(RpcMethodObjectMap.class);

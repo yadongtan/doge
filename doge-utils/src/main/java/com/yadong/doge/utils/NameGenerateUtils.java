@@ -47,6 +47,13 @@ public class NameGenerateUtils {
         }else{
             interfaceName = object.getClass().getName();
         }
+        return generateZkNodePath(method, interfaceName);
+    }
+
+    public static String generateZkNodePath(Method method, String interfaceName){
+        StringBuilder builder = new StringBuilder();
+        // 只传入接口类型, 接口方法
+        // 返回 父接口类名#方法名#arg1.arg2.arg3 -- 方法
         builder.append("/").append(interfaceName).append("/");
         builder.append(method.getName());
         logger.info("生成key:" + builder.toString());

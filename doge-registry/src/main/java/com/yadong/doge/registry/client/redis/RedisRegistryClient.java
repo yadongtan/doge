@@ -24,23 +24,35 @@ public class RedisRegistryClient implements RegistryClient {
     }
 
     @Override
-    public boolean registry(Method method, Object obj, HostInfo info) {
-        logger.info("[Redis] 发起注册, 方法:" + method + "###对象:" + obj + "###(" + info.getHost() + ":" + info.getPort() + ")");
-        redisUtil.lSet(NameGenerateUtils.generateRedisPath(method, obj), ObjectMapperUtils.toJSON(info));
+    public boolean registry(Method method, Class<?> interfaceClass, HostInfo info) {
+        return registry(method, interfaceClass.getName(), info);
+    }
+
+
+
+    @Override
+    public List<HostInfo> getHost(Method method, Class<?> interfaceClass) {
+        return getHost(method, interfaceClass.getName());
+    }
+
+    @Override
+    public boolean registry(Method method, String interfaceName, HostInfo info) {
+        logger.info("[Redis] 发起注册, 方法:" + method + "###对象:" + interfaceName + "###(" + info.getHost() + ":" + info.getPort() + ")");
+        redisUtil.lSet(NameGenerateUtils.generateRedisPath(method, interfaceName), ObjectMapperUtils.toJSON(info));
         return true;
     }
 
     @Override
-    public List<HostInfo> getHost(Method method, Object obj) {
-        logger.info("[Redis] 拉取主机信息, 方法:" + method + "###对象:" + obj );
-        List<Object> list = redisUtil.lGet(NameGenerateUtils.generateRedisPath(method, obj), 0, -1);
+    public List<HostInfo> getHost(Method method, String interfaceName) {
+        logger.info("[Redis] 拉取主机信息, 方法:" + method + "###对象:" + interfaceName );
+        List<Object> list = redisUtil.lGet(NameGenerateUtils.generateRedisPath(method, interfaceName), 0, -1);
         if(list == null){
             return null;
         }
         List<HostInfo> hostInfos = new ArrayList<>(list.size());
         for (Object hi : list) {
             HostInfo hostInfo = ObjectMapperUtils.toObject(hi.toString(), HostInfo.class);
-                hostInfos.add(hostInfo);
+            hostInfos.add(hostInfo);
         }
         for (HostInfo hostInfo : hostInfos) {
             logger.info("[Redis]获取到主机信息:" + hostInfo);

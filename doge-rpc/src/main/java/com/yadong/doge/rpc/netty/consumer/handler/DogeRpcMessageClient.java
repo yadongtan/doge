@@ -4,9 +4,10 @@ import com.yadong.doge.rpc.invoker.InvokedResult;
 import com.yadong.doge.rpc.invoker.Invoker;
 
 import java.util.concurrent.Callable;
+import java.util.concurrent.Future;
 
 public interface DogeRpcMessageClient{
 
-    public void syncSendInvoker(Invoker invoker);
+    public Future<Object> syncSendInvoker(Invoker invoker);
 
 }

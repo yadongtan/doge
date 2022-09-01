@@ -93,8 +93,6 @@ public class DogeRegistryClientAutoConfiguration {
             return redisTemplate;
         }
 
-
-
         @ConditionalOnBean({RedisTemplate.class})
         @Bean
         public RedisUtil redisUtil(RedisTemplate<String, Object> redisTemplate){

@@ -2,13 +2,20 @@ package com.yadong.doge.rpc.invoker;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yadong.doge.rpc.annotation.DogeReference;
+import com.yadong.doge.rpc.cluster.BroadcastCluster;
+import com.yadong.doge.rpc.cluster.Cluster;
+import com.yadong.doge.rpc.cluster.ClusterFactory;
+import com.yadong.doge.rpc.cluster.FailoverCluster;
 import com.yadong.doge.utils.NameGenerateUtils;
 import com.yadong.doge.utils.ObjectMapperUtils;
+import org.checkerframework.checker.units.qual.A;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author YadongTan
@@ -21,11 +28,71 @@ public class Invoker {
     private Object[] args;
     @JsonIgnore
     private Method method;
+    @JsonIgnore
+    private String loadBalanceName;
+    @JsonIgnore
+    private String clusterName;
+    @JsonIgnore
+    private String interfaceName;
+    @JsonIgnore
+    private static AtomicInteger publicLockCount = new AtomicInteger(0);
+    @JsonIgnore
+    private Class<?> targetClass;
 
-    public Invoker(Class<?> targetClass, Method method, Object[] args) {
+    private Integer lockId;
+
+    public Invoker(){
+
+    }
+    public Invoker(Class<?> targetClass, Method method, Object[] args, DogeReference dogeReference) {
         this.method = method;
         key = NameGenerateUtils.generateMethodMapKey(method, targetClass);
         this.args = args;
+        this.loadBalanceName = dogeReference.loadBalance();
+        this.clusterName = dogeReference.cluster();
+        this.interfaceName = targetClass.getName();
+        this.lockId = publicLockCount.incrementAndGet();
+        this.targetClass = targetClass;
+    }
+
+    public Class<?> getTargetClass() {
+        return targetClass;
+    }
+
+    public void setTargetClass(Class<?> targetClass) {
+        this.targetClass = targetClass;
+    }
+
+    public void setLockId(Integer lockId) {
+        this.lockId = lockId;
+    }
+
+    public Integer getLockId() {
+        return lockId;
+    }
+
+    public String getClusterName() {
+        return clusterName;
+    }
+
+    public void setClusterName(String clusterName) {
+        this.clusterName = clusterName;
+    }
+
+    public String getInterfaceName() {
+        return interfaceName;
+    }
+
+    public void setInterfaceName(String interfaceName) {
+        this.interfaceName = interfaceName;
+    }
+
+    public String getLoadBalanceName() {
+        return loadBalanceName;
+    }
+
+    public void setLoadBalanceName(String loadBalanceName) {
+        this.loadBalanceName = loadBalanceName;
     }
 
     public Method getMethod() {
@@ -70,7 +137,12 @@ public class Invoker {
         Object targetObject = RpcMethodObjectMap.getInstance().getTargetObject(key);
         Object result = targetMethod.invoke(targetObject, args);
         String className = result.getClass().getTypeName();
-        return new InvokedResult(className, ObjectMapperUtils.toJSON(result));
+        return new InvokedResult(className, ObjectMapperUtils.toJSON(result), lockId);
+    }
+
+    //去远程调用目标方法
+    public Object invokeRemoted() throws InvocationTargetException, IllegalAccessException {
+        return ClusterFactory.getCluster(clusterName).clusterInvoke(this);
     }
 
 

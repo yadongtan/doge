@@ -23,8 +23,11 @@ public class NettyRpcClient {
 
     private static final Logger logger = LoggerFactory.getLogger(NettyRpcClient.class);
 
+    public static SyncDogeRpcMessageClient createClient(HostInfo hostInfo) throws InterruptedException {
+        NettyRpcClient nettyRpcClient = new NettyRpcClient();
+        return nettyRpcClient.start(hostInfo);
+    }
 
-    //
     public SyncDogeRpcMessageClient start(HostInfo hostInfo) throws InterruptedException {
         return start0(hostInfo.getHost(), hostInfo.getPort());
     }

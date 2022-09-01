@@ -57,8 +57,8 @@ public class DogeServiceAnnotationScanListener implements ApplicationListener<Co
             beansWithAnnotation.forEach((key, obj) ->{
                 RpcMethodObjectMap.getInstance().addInvokerMethod(obj);
                 for (Method method : obj.getClass().getDeclaredMethods()) {
-                    registryClient.registry(method, obj, info);
-                    registryClient.getHost(method, obj);
+                    registryClient.registry(method, obj.getClass().getInterfaces()[0], info);
+                    registryClient.getHost(method, obj.getClass().getInterfaces()[0]);
                 }
             });
         }).start();

@@ -35,6 +35,9 @@ public class RandomLoadBalance extends AbstractLoadBalance {
                 }
             }
         }
+        if(length == 0 || length < 0){
+            System.out.println("....");
+        }
         return hostInfos.get(ThreadLocalRandom.current().nextInt(length));
     }
 

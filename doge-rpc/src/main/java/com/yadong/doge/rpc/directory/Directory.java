@@ -1,7 +1,11 @@
 package com.yadong.doge.rpc.directory;
 
 
+import com.yadong.doge.registry.config.HostInfo;
+import com.yadong.doge.rpc.invoker.Invoker;
+
 import java.lang.reflect.Method;
+import java.util.List;
 
 /**
 * @author YadongTan
@@ -10,7 +14,7 @@ import java.lang.reflect.Method;
 */
 public interface Directory {
 
-    void pull(Method method, Object object);
-
-
+    //List<HostInfo> pull(Method method, String interfaceName);
+    public List<HostInfo> pull(Method method, Class<?> targetClass);
+    List<HostInfo> search(Invoker invoker);
 }

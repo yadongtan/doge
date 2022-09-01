@@ -12,13 +12,14 @@ public interface SyncDogeRpcMessageClient extends DogeRpcMessageClient {
     ExecutorService executor = Executors.newCachedThreadPool();
 
     @Override
-    default void syncSendInvoker(Invoker invoker) {
+    default Future<Object> syncSendInvoker(Invoker invoker) {
         Future<Object> objectFuture = executor.submit(new Callable<Object>() {
             @Override
             public Object call() throws Exception {
                 return send(invoker);
             }
         });
+        return objectFuture;
     }
 
     // must be implement with subclass!

@@ -20,6 +20,7 @@ public class ConsistentHashLoadBalance extends AbstractLoadBalance{
         return hostInfos.get(index);
     }
 
+    // 快速取模, 自己创造的算法, 史无前例吧应该
     private int getIndex(int num, int length) {
         int n = length - 1;
         n |= n >>> 1;

@@ -24,18 +24,29 @@ public class ZookeeperRegistryClient implements RegistryClient {
     }
 
     @Override
-    public boolean registry(Method method, Object obj, HostInfo info) {
-        logger.info("[Zookeeper] 发起注册, 方法:" + method + "###对象:" + obj + "###(" + info.getHost() + ":" + info.getPort() + ")");
-        String path = NameGenerateUtils.generateZkNodePath(method, obj) + "/" + info.getHost() + ":" + info.getPort();
-        zkCuratorUtil.createNodeSimple(path);
+    public boolean registry(Method method, Class<?> interfaceClass, HostInfo info) {
+        registry(method, interfaceClass.getName(), info);
+        return true;
+    }
+
+    @Override
+    public List<HostInfo> getHost(Method method,  Class<?> interfaceClass) {
+        return getHost(method, interfaceClass.getName());
+    }
+
+    @Override
+    public boolean registry(Method method, String interfaceName, HostInfo info) {
+        logger.info("[Zookeeper] 发起注册, 方法:" + method + "###对象:" + interfaceName + "###(" + info.getHost() + ":" + info.getPort() + ")");
+        String path = NameGenerateUtils.generateZkNodePath(method, interfaceName) + "/" + info.getHost() + ":" + info.getPort();
+        zkCuratorUtil.createTempNodeSimple(path);
         zkCuratorUtil.setData(path, ObjectMapperUtils.toJSON(info.getHostData()));
         return true;
     }
 
     @Override
-    public List<HostInfo> getHost(Method method, Object obj) {
-        logger.info("[Zookeeper] 获取节点信息, 方法:" + method + "###对象:" + obj);
-        String parentNode = NameGenerateUtils.generateZkNodePath(method, obj);
+    public List<HostInfo> getHost(Method method, String interfaceName) {
+        logger.info("[Zookeeper] 获取节点信息, 方法:" + method + "###对象:" + interfaceName);
+        String parentNode = NameGenerateUtils.generateZkNodePath(method, interfaceName);
         List<String> childNode = zkCuratorUtil.getChildNode(parentNode);
         // childNode.forEach(System.out::println);
         List<HostInfo> hostInfos = new LinkedList<>();

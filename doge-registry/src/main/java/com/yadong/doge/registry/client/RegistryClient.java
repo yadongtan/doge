@@ -11,6 +11,8 @@ import java.util.List;
 * @Description 向注册中心注册的客户端
 */
 public interface RegistryClient {
-    public boolean registry(Method method, Object obj, HostInfo info);
-    public List<HostInfo> getHost(Method method, Object obj);
+    public boolean registry(Method method, Class<?> interfaceClass, HostInfo info);
+    public List<HostInfo> getHost(Method method, Class<?> interfaceClass);
+    public boolean registry(Method method, String interfaceName, HostInfo info);
+    public List<HostInfo> getHost(Method method, String interfaceName);
 }
