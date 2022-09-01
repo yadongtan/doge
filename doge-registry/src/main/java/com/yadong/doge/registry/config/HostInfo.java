@@ -7,8 +7,11 @@ package com.yadong.doge.registry.config;
 */
 public class HostInfo {
 
+
+
     private String host;
     private int port;
+    HostData hostData;  //一些主机提供者的信息,比如接口版本,运行状态, 权重
 
     public HostInfo(){
     }
@@ -16,26 +19,40 @@ public class HostInfo {
     public HostInfo(String host, int port){
         this.host = host;
         this.port = port;
+        hostData = new HostData();
     }
 
     public String getHost() {
         return host;
     }
 
-    public void setHost(String host) {
+    public HostInfo setHost(String host) {
         this.host = host;
+        return this;
     }
 
     public int getPort() {
         return port;
     }
 
-    public void setPort(int port) {
+    public HostInfo setPort(int port) {
         this.port = port;
+        return this;
+    }
+
+    public HostData getHostData() {
+        return hostData;
+    }
+
+    public void setHostData(HostData hostData) {
+        this.hostData = hostData;
     }
 
     @Override
     public String toString() {
-        return host + ":" +port;
+        StringBuilder builder = new StringBuilder();
+        builder.append("[").append(host).append(":").append(port).append("]###")
+                .append(hostData.toString());
+        return builder.toString();
     }
 }

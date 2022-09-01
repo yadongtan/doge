@@ -3,7 +3,6 @@ package com.yadong.doge.rpc.netty.consumer;
 
 import com.yadong.doge.registry.config.HostInfo;
 import com.yadong.doge.rpc.netty.consumer.handler.DogeClientMessageHandler;
-import com.yadong.doge.rpc.netty.consumer.handler.DogeRpcMessageClient;
 import com.yadong.doge.rpc.netty.consumer.handler.SyncDogeRpcMessageClient;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;

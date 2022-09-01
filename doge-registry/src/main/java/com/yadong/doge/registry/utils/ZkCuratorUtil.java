@@ -4,6 +4,7 @@ package com.yadong.doge.registry.utils;
 
 
 import org.apache.curator.framework.CuratorFramework;
+import org.apache.zookeeper.CreateMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +29,16 @@ public class ZkCuratorUtil {
         try {
             if (null == client.checkExists().forPath(path)) {
                 client.create().creatingParentsIfNeeded().forPath(path);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    //创建节点
+    public void createTempNodeSimple(String path){
+        try {
+            if (null == client.checkExists().forPath(path)) {
+                client.create().creatingParentsIfNeeded().withMode(CreateMode.EPHEMERAL).forPath(path);
             }
         } catch (Exception e) {
             e.printStackTrace();
