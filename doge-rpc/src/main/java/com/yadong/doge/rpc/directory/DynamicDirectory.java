@@ -5,7 +5,6 @@ import com.yadong.doge.rpc.invoker.Invoker;
 import com.yadong.doge.utils.NameGenerateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -58,7 +57,7 @@ public class DynamicDirectory extends AbstractDirectory {
     }
 
     @Override
-    public List<HostInfo> search(Invoker invoker) {
+    public synchronized List<HostInfo> search(Invoker invoker) {
         List<HostInfo> hostInfos = hostInfoMap.get(invoker.getKey());
         if(hostInfos == null || hostInfos.isEmpty()){
             return pull(invoker.getMethod(), invoker.getTargetClass());

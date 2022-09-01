@@ -8,8 +8,13 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class DogeServerMessageHandler extends ChannelInboundHandlerAdapter{
+import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
+public class DogeServerMessageHandler extends ChannelInboundHandlerAdapter {
+
+    private static final ExecutorService executor = Executors.newCachedThreadPool();
     private static final Logger logger = LoggerFactory.getLogger(DogeServerMessageHandler.class);
 
     private ChannelHandlerContext context;
@@ -23,17 +28,29 @@ public class DogeServerMessageHandler extends ChannelInboundHandlerAdapter{
         logger.info("服务器接收到连接请求...");
     }
 
+
     //读取到来自消费者的方法调用请求
     @Override
-    public synchronized void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+        executor.submit(new Runnable() {
+            @Override
+            public void run() {
 //        ByteBuf buf= (ByteBuf) msg;
 //        String message = buf.toString(CharsetUtil.UTF_8);
-        String message = (String) msg;
-        logger.info("接收到远程调用请求:[" + message + " ]");
-        Invoker invoker = ObjectMapperUtils.toObject(message, Invoker.class);
-        InvokedResult invokedResult = invoker.invoke();
-        logger.info("生成执行结果:[" + invokedResult + "]");
-        ctx.writeAndFlush(ObjectMapperUtils.toJSON(invokedResult));
+                String message = (String) msg;
+                logger.info("接收到远程调用请求:[" + message + " ]");
+                Invoker invoker = ObjectMapperUtils.toObject(message, Invoker.class);
+                InvokedResult invokedResult = null;
+                try {
+                    invokedResult = invoker.invoke();
+                } catch (InvocationTargetException | IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                logger.info("生成执行结果:[" + invokedResult + "]");
+                ctx.writeAndFlush(ObjectMapperUtils.toJSON(invokedResult) + "\r\n");
+            }
+        });
+
     }
 
 }

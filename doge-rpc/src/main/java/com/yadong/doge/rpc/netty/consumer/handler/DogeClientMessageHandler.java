@@ -53,10 +53,11 @@ public class DogeClientMessageHandler extends ChannelInboundHandlerAdapter imple
         // only lock current invoker and its thread !
         lockMap.put(invoker.getLockId(), invokerAndResultMap);
             //发起远程调用
-        ChannelFuture channelFuture = context.writeAndFlush(json);
+        ChannelFuture channelFuture = context.writeAndFlush(json + "\r\n");
         ChannelFuture sync = channelFuture.sync();
             //进行wait
         synchronized (invokerAndResultMap){
+            logger.info("进入同步代码块");
             invokerAndResultMap.wait(); //等待channelRead 方法获取到获取的结果后, 会唤醒这个线程
         }
         InvokedResult invokedResult = invokerAndResultMap.getInvokedResult();

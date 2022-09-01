@@ -18,15 +18,19 @@ public class NettyClientHostMap {
    private static final ConcurrentHashMap<HostInfo, SyncDogeRpcMessageClient> clientMap = new ConcurrentHashMap<>(64);
 
     // 如果没有,则创建一个连接
-    public static SyncDogeRpcMessageClient get(HostInfo hostInfo) {
-        return clientMap.computeIfAbsent(hostInfo, k -> {
-            try {
-                return NettyRpcClient.createClient(hostInfo);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    public static SyncDogeRpcMessageClient get(HostInfo hostInfo) throws InterruptedException {
+        SyncDogeRpcMessageClient client = clientMap.get(hostInfo);
+        if (client == null) {
+            synchronized (hostInfo) {
+                if (clientMap.get(hostInfo) == null) {
+                    client = NettyRpcClient.createClient(hostInfo);
+                    clientMap.put(hostInfo, client);
+                }
             }
-            return null;
-        });
+            return clientMap.get(hostInfo);
+        }else{
+            return client;
+        }
     }
 
 }

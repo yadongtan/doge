@@ -5,10 +5,15 @@ import com.yadong.doge.registry.config.HostInfo;
 import com.yadong.doge.rpc.netty.consumer.handler.DogeClientMessageHandler;
 import com.yadong.doge.rpc.netty.consumer.handler.SyncDogeRpcMessageClient;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.handler.codec.Delimiters;
+import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import org.slf4j.Logger;
@@ -34,8 +39,9 @@ public class NettyRpcClient {
 
     private SyncDogeRpcMessageClient start0(String hostname, int port) throws InterruptedException {
         DogeClientMessageHandler client = new DogeClientMessageHandler();
-        NioEventLoopGroup group = new NioEventLoopGroup();
+        NioEventLoopGroup group = new NioEventLoopGroup(8);
         Bootstrap bootstrap = new Bootstrap();
+        ByteBuf delimiter = Unpooled.copiedBuffer("\r\n".getBytes());
         bootstrap.group(group)
                 .option(ChannelOption.TCP_NODELAY, true)
                 .option(ChannelOption.SO_KEEPALIVE, true)
@@ -44,7 +50,8 @@ public class NettyRpcClient {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         ChannelPipeline pipeline = socketChannel.pipeline();
-                        pipeline//.addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()))
+                        pipeline.addFirst(new DelimiterBasedFrameDecoder(60000,delimiter))
+                                //.addLast(new LineBasedFrameDecoder(1024))
                                 .addLast(new StringDecoder())
                                 .addLast(new StringEncoder())
                                 .addLast(client);

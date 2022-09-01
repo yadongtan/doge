@@ -4,12 +4,10 @@ import com.yadong.doge.config.ProviderProperties;
 import com.yadong.doge.rpc.annotation.DogeService;
 import entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import service.UserService;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.Properties;
 
 @DogeService
 public class UserServiceImpl implements UserService {
@@ -23,6 +21,11 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setUsername(username);
         user.setPassword(Long.toString(System.currentTimeMillis()));
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return user;
     }
 
