@@ -43,8 +43,18 @@ public class Invoker {
     private Class<?> targetClass;
     @JsonIgnore
     private HostInfo hostInfo;
+    @JsonIgnore
+    private String version;
 
     private Integer lockId;
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
 
     public static AtomicInteger getPublicLockCount() {
         return publicLockCount;
@@ -74,6 +84,7 @@ public class Invoker {
         this.interfaceName = targetClass.getName();
         this.lockId = publicLockCount.incrementAndGet();
         this.targetClass = targetClass;
+        this.version = dogeReference.version();
     }
 
     public Class<?> getTargetClass() {

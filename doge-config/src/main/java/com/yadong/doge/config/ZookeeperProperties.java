@@ -17,7 +17,7 @@ public class ZookeeperProperties {
     private int retrySleepTime = 5000;
     private int maxRetries = 5;
     private String host;
-    private int port = 2180;
+    private int port = 2181;
 
     public Logger getLogger() {
         return logger;

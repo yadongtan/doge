@@ -18,6 +18,7 @@ public class RpcStatusWatcher {
     private final RpcStatus status;
     private long startTime;
     private long endTime;
+    private long elapsed;
 
     public RpcStatusWatcher(Invoker invoker){
         this.status = RpcStatus.getStatus(invoker.getHostInfo().getHostAndPort(), invoker.getMethod().getName());
@@ -34,7 +35,7 @@ public class RpcStatusWatcher {
     // 成功返回时调用
     public void stop(){
         endTime = System.currentTimeMillis();
-        long elapsed = endTime - startTime;
+        elapsed = endTime - startTime;
         status.activeDecr();    //活跃计数器-1
         status.totalElapsedUpdate(elapsed); //总响应时间 + 本次
         status.succeededMaxElaspsedUpdate(elapsed); //最大成功响应时间 比较
@@ -44,7 +45,7 @@ public class RpcStatusWatcher {
     // 失败时调用
     public void stopFailed(){
         endTime = System.currentTimeMillis();
-        long elapsed = endTime - startTime;
+        elapsed = endTime - startTime;
         status.activeDecr();    //活跃计数器-1
         status.failedIncr();    //失败次数+1
         status.failedElaspsedUpdate(elapsed);   //失败的总响应时间 + 本次
@@ -52,6 +53,7 @@ public class RpcStatusWatcher {
         status.maxElaspsedUpdate(elapsed);  //最大响应时间 比较
     }
 
-
-
+    public long getElapsed(){
+        return elapsed;
+    }
 }

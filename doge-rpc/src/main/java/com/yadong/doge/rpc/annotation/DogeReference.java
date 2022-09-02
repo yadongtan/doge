@@ -16,4 +16,5 @@ import java.lang.annotation.*;
 public @interface DogeReference {
     String cluster() default "failover";    //默认集群容错策略  全小写
     String loadBalance() default "random";  //默认负载均衡策略 全小写
+    String version() default "1.0"; //默认调用版本
 }

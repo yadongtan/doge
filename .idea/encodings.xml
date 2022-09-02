@@ -3,8 +3,8 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/doge-cluster/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/doge-config/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/doge-monitor/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/doge-registry/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/doge-remoting/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/doge-rpc/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/doge-test-api-commons/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/doge-test-consumer/src/main/java" charset="UTF-8" />

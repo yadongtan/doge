@@ -1,17 +1,19 @@
 
 
 doge:
+  registry: zookeeper
   zookeeper:
-    host: 120.26.76.100
+    host: 120.26.76.100 #must, the registry center
     port: 2181
     connection-timeout: 60000
     session-timeout: 60000
     retry-sleep-time: 5000
     max-retries: 5
   monitor:
-    enable: true
-  remote:
     monitor-host: 127.0.0.1
-    monitor-port: 18888
+    monitor-port: 18888 #the monitor will start netty server
 server:
-  port: 8080
+  port: 8888 # the web page for monitor
+
+
+

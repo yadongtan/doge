@@ -7,7 +7,6 @@ import com.yadong.doge.utils.ObjectMapperUtils;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import jdk.internal.org.objectweb.asm.tree.IincInsnNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,8 +18,6 @@ public class DogeClientMessageHandler extends ChannelInboundHandlerAdapter imple
     private static final ConcurrentHashMap<Integer, InvokerAndResultMap> lockMap= new ConcurrentHashMap<>();
 
     private static final Logger logger = LoggerFactory.getLogger(DogeClientMessageHandler.class);
-
-    private static final ThreadLocal<Object> threadLocal = new ThreadLocal<>();
 
     private ChannelHandlerContext context;
 
@@ -57,7 +54,7 @@ public class DogeClientMessageHandler extends ChannelInboundHandlerAdapter imple
         ChannelFuture sync = channelFuture.sync();
             //进行wait
         synchronized (invokerAndResultMap){
-            logger.info("进入同步代码块");
+            logger.info("等待执行结果");
             invokerAndResultMap.wait(); //等待channelRead 方法获取到获取的结果后, 会唤醒这个线程
         }
         InvokedResult invokedResult = invokerAndResultMap.getInvokedResult();

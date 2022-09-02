@@ -1,9 +1,6 @@
 package com.yadong.doge.config.stater;
 
-import com.yadong.doge.config.ConsumerProperties;
-import com.yadong.doge.config.ProviderProperties;
-import com.yadong.doge.config.RedisProperties;
-import com.yadong.doge.config.ZookeeperProperties;
+import com.yadong.doge.config.*;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -34,12 +31,23 @@ public class DogeAutoConfigurationStarter {
     }
 
     @Configuration
+    @EnableConfigurationProperties(MonitorProperties.class)
+    protected static class MonitorConfiguration{
+    }
+
+    @Configuration
     @EnableConfigurationProperties(ZookeeperProperties.class)
     protected static class ZookeeperConfiguration{
 
-        @Bean("zookeeper")
-        public Object ZookeeperClient(ZookeeperProperties zookeeperProperties) {
-            return "ZookeeperClient";
-        }
+//        @Bean("zookeeper")
+//        public Object ZookeeperClient(ZookeeperProperties zookeeperProperties) {
+//            return "ZookeeperClient";
+//        }
+    }
+
+    @Configuration
+    @EnableConfigurationProperties(RegistryProperties.class)
+    protected static class RegistryConfiguration{
+
     }
 }

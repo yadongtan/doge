@@ -13,8 +13,27 @@ import javax.annotation.PostConstruct;
 */
 @ConfigurationProperties(prefix = "doge.remote")
 public class ConsumerProperties {
-    Logger logger = LoggerFactory.getLogger(ConsumerProperties.class);
 
+    private String monitorHost;    //monitor-host  客户端连接远程中心的地址
+    private int monitorPort;    //monitor-port
+
+    public String getMonitorHost() {
+        return monitorHost;
+    }
+
+    public void setMonitorHost(String monitorHost) {
+        this.monitorHost = monitorHost;
+    }
+
+    public int getMonitorPort() {
+        return monitorPort;
+    }
+
+    public void setMonitorPort(int monitorPort) {
+        this.monitorPort = monitorPort;
+    }
+
+    Logger logger = LoggerFactory.getLogger(ConsumerProperties.class);
 
     @PostConstruct
     public void initInfo(){

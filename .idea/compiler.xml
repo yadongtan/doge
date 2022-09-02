@@ -11,18 +11,22 @@
         <module name="doge-config" />
         <module name="doge-test-consumer" />
         <module name="doge-utils" />
+        <module name="doge-monitor" />
         <module name="doge-registry" />
         <module name="doge-test-provider-2" />
         <module name="doge-test-provider-1" />
         <module name="doge-cluster" />
-        <module name="doge-remoting" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="doge-remoting" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="doge-cluster" options="-parameters" />
       <module name="doge-config" options="-parameters" />
+      <module name="doge-monitor" options="-parameters" />
       <module name="doge-registry" options="-parameters" />
       <module name="doge-remoting" options="-parameters" />
       <module name="doge-rpc" options="-parameters" />

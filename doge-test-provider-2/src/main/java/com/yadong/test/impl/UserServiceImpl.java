@@ -32,9 +32,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public String loginUser(String username, String password) {
         try {
-            Thread.sleep(1000);
             return InetAddress.getLocalHost().getHostAddress() + ":" + properties.getPort() + "]用户[" + username + "]登录成功";
-        } catch (UnknownHostException | InterruptedException e) {
+        } catch (UnknownHostException e) {
             e.printStackTrace();
         }
         return null;

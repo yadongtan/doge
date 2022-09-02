@@ -17,7 +17,7 @@ public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @DogeReference(loadBalance = LoadBalanceFactory.SHORTEST_RESPONSE)
+    @DogeReference(loadBalance = LoadBalanceFactory.ROUND)
     UserService userService;
 
     @RequestMapping("/info/{username}")

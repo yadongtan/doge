@@ -13,11 +13,11 @@
         <module>doge-test-provider-2</module>
         <module>doge-test-api-commons</module>
         <module>doge-rpc</module>
-        <module>doge-remoting</module>
         <module>doge-registry</module>
         <module>doge-config</module>
         <module>doge-utils</module>
         <module>doge-cluster</module>
+        <module>doge-monitor</module>
     </modules>
     <packaging>pom</packaging>
 
