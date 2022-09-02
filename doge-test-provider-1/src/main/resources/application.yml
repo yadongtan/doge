@@ -4,7 +4,7 @@ server:
 doge:
   registry: zookeeper #option
   zookeeper:
-    host: 120.26.76.100 #must
+    host:  #must
     port: 2181
     connection-timeout: 60000
     session-timeout: 60000
@@ -16,10 +16,10 @@ doge:
 spring:
   redis:  # must if use redis
     database: 0
-    host: r-bp1fo4mh3prhp0du3ypd.redis.rds.aliyuncs.com
+    host: 
     port: 6379
     timeout: 10s
-    password: 2209931449Qq
+    password: 
     jedis:
       pool:
         min-idle: 0
