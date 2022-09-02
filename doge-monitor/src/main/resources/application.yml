@@ -3,7 +3,7 @@
 doge:
   registry: zookeeper
   zookeeper:
-    host: 120.26.76.100 #must, the registry center
+    host:  #must, the registry center
     port: 2181
     connection-timeout: 60000
     session-timeout: 60000
