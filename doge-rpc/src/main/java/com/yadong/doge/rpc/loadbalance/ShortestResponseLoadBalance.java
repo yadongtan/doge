@@ -12,6 +12,7 @@ import java.util.concurrent.ThreadLocalRandom;
 * @author YadongTan
 * @date 2022/9/1 14:22
 * @Description 最短响应时间
+* 已测试,可用
 */
 public class ShortestResponseLoadBalance extends AbstractLoadBalance{
     @Override
@@ -37,10 +38,10 @@ public class ShortestResponseLoadBalance extends AbstractLoadBalance{
             HostInfo hostInfo = hostInfos.get(i);
             RpcStatus rpcStatus = RpcStatus.getStatus(hostInfo.getHostAndPort(), invoker.getMethod().getName());
             // 计算成功的平均响应时间
-            long succeededAverageElaspsed = rpcStatus.getSucceededMaxElaspsed();
+            long succeededAverageElaspsed = rpcStatus.getSucceededMaxElapsed();
             // 计数器
             int actvie = rpcStatus.getActive();
-            // 成功的平均响应时间 * 技术
+            // 成功的平均响应时间 * 计数
             long estimateResponse = succeededAverageElaspsed * actvie;
             // 预热权重
             int afterWarmup = getWeight(hostInfo);

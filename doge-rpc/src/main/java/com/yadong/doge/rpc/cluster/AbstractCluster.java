@@ -22,14 +22,16 @@ public abstract class AbstractCluster implements Cluster {
     public Object commonInvoke(Invoker invoker) throws UnknownLoadBalanceException, ExecutionException, InterruptedException {
         // 获取主机
         List<HostInfo> hostInfos = directory.search(invoker);
-        // 负债均线
+        // 负载均衡
         LoadBalance loadBalance = LoadBalanceFactory.getLoadBalance(invoker);
         HostInfo hostInfo = loadBalance.doSelect(hostInfos, invoker);
+        // 绑定主机信息
+        invoker.setHostInfo(hostInfo);
         // 获取客户端
         SyncDogeRpcMessageClient client = NettyClientHostMap.get(hostInfo);
         // 异步调用
         Future<Object> objectFuture = client.syncSendInvoker(invoker);
-        // 阻塞等待返回
+        // 阻塞等待返回, 可返回future实现异步返回
         return objectFuture.get();
     }
 

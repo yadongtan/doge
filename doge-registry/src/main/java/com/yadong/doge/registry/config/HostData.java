@@ -9,7 +9,7 @@ public class HostData {
 
     public HostData(){
         status = HostInfoStatus.RUNNING;
-        weight = 0;
+        weight = 100;
         version = "default";
     }
 

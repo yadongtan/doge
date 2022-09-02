@@ -10,6 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 * @author YadongTan
 * @date 2022/9/1 11:50
 * @Description 随机加权算法
+* 已测试,可用
 */
 public class RandomLoadBalance extends AbstractLoadBalance {
 

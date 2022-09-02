@@ -10,6 +10,7 @@ import java.util.List;
 * @author YadongTan
 * @date 2022/9/1 15:33
 * @Description 简易的一致性hash实现
+* 已测试,可用
 */
 public class ConsistentHashLoadBalance extends AbstractLoadBalance{
 

@@ -11,6 +11,7 @@ import java.util.concurrent.atomic.AtomicLong;
 * @author YadongTan
 * @date 2022/9/1 11:49
 * @Description 加权轮询
+* 已测试,可用
 */
 public class RoundRobinLoadBalance extends AbstractLoadBalance{
 

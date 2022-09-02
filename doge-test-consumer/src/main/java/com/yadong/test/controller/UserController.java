@@ -1,6 +1,8 @@
 package com.yadong.test.controller;
 
 import com.yadong.doge.rpc.annotation.DogeReference;
+import com.yadong.doge.rpc.loadbalance.LoadBalanceFactory;
+import com.yadong.doge.rpc.status.RpcStatus;
 import entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +17,7 @@ public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @DogeReference
+    @DogeReference(loadBalance = LoadBalanceFactory.SHORTEST_RESPONSE)
     UserService userService;
 
     @RequestMapping("/info/{username}")
@@ -36,6 +38,11 @@ public class UserController {
         return userService.loginUser(username, password);
     }
 
+
+    @RequestMapping("/monitor")
+    public String monitor(){
+        return RpcStatus.show();
+    }
 
 //    @RequestMapping("/test")
 //    public String loginUser() throws InterruptedException {

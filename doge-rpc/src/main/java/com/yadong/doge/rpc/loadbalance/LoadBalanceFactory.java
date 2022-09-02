@@ -6,6 +6,12 @@ import com.yadong.doge.rpc.invoker.Invoker;
 
 public class LoadBalanceFactory {
 
+    public static final String HASH = "hash";
+    public static final String LEAST_ACTIVE = "leastActive";
+    public static final String RANDOM = "random";
+    public static final String ROUND = "round";
+    public static final String SHORTEST_RESPONSE = "shortestResponse";
+
 
     public static LoadBalance getLoadBalance(Invoker invoker) throws UnknownLoadBalanceException {
         String loadBalanceName = invoker.getLoadBalanceName();

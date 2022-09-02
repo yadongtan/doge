@@ -2,6 +2,7 @@ package com.yadong.doge.rpc.invoker;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yadong.doge.registry.config.HostInfo;
 import com.yadong.doge.rpc.annotation.DogeReference;
 import com.yadong.doge.rpc.cluster.BroadcastCluster;
 import com.yadong.doge.rpc.cluster.Cluster;
@@ -13,6 +14,8 @@ import org.checkerframework.checker.units.qual.A;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -38,8 +41,26 @@ public class Invoker {
     private static AtomicInteger publicLockCount = new AtomicInteger(0);
     @JsonIgnore
     private Class<?> targetClass;
+    @JsonIgnore
+    private HostInfo hostInfo;
 
     private Integer lockId;
+
+    public static AtomicInteger getPublicLockCount() {
+        return publicLockCount;
+    }
+
+    public static void setPublicLockCount(AtomicInteger publicLockCount) {
+        Invoker.publicLockCount = publicLockCount;
+    }
+
+    public HostInfo getHostInfo() {
+        return hostInfo;
+    }
+
+    public void setHostInfo(HostInfo hostInfo) {
+        this.hostInfo = hostInfo;
+    }
 
     public Invoker(){
 
@@ -145,5 +166,18 @@ public class Invoker {
         return ClusterFactory.getCluster(clusterName).clusterInvoke(this);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Invoker invoker = (Invoker) o;
+        return Objects.equals(key, invoker.key) && Arrays.equals(args, invoker.args) && Objects.equals(method, invoker.method);
+    }
 
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(key, method);
+        result = 31 * result + Arrays.hashCode(args);
+        return result;
+    }
 }

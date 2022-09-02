@@ -14,6 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
 * @author YadongTan
 * @date 2022/9/1 13:19
 * @Description 最少连接
+* 已测试,可用
 */
 public class LeastActiveLoadBalance extends AbstractLoadBalance {
 
