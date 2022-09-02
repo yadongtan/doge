@@ -2,7 +2,7 @@
 
 doge:
   zookeeper:
-    host: 120.26.76.100
+    host: 
     port: 2181
     connection-timeout: 60000
     session-timeout: 60000
