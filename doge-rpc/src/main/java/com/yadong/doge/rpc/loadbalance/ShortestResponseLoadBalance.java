@@ -2,9 +2,8 @@ package com.yadong.doge.rpc.loadbalance;
 
 import com.yadong.doge.registry.config.HostInfo;
 import com.yadong.doge.rpc.invoker.Invoker;
-import com.yadong.doge.rpc.status.RpcStatus;
+import com.yadong.doge.registry.status.RpcStatus;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 

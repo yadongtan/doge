@@ -1,13 +1,16 @@
 package com.yadong.test.controller;
 
 import com.yadong.doge.rpc.annotation.DogeReference;
+import com.yadong.doge.rpc.directory.Directory;
 import com.yadong.doge.rpc.loadbalance.LoadBalanceFactory;
-import com.yadong.doge.rpc.status.RpcStatus;
+import com.yadong.doge.registry.status.RpcStatus;
 import entity.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import service.UserService;
 
@@ -51,4 +54,12 @@ public class UserController {
 //        return "Test";
 //    }
 
+
+    @Autowired
+    Directory directory;
+
+    @RequestMapping(value = "/hostmap", method = RequestMethod.GET)
+    public String hostMap() {
+        return directory.show();
+    }
 }

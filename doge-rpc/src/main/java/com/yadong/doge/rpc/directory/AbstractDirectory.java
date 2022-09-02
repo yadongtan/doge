@@ -19,4 +19,22 @@ public abstract class AbstractDirectory implements Directory{
    public static void setRegistryClient(RegistryClient registryClient) {
       AbstractDirectory.registryClient = registryClient;
    }
+
+   public String show() {
+      StringBuilder builder = new StringBuilder();
+      builder.append("客户端获取到的服务主机信息如下:");
+      hostInfoMap.forEach((key, hostInfos) -> {
+         builder.append("<br/>key: ").append(key);
+         for (HostInfo hostInfo : hostInfos) {
+            builder.append("<br/>&nbsp&nbsp&nbsp&nbsp&nbsp ip:" + hostInfo.getHostAndPort());
+            builder.append("<br/>&nbsp&nbsp&nbsp&nbsp&nbsp version:" + hostInfo.getHostData().getVersion());
+            builder.append("<br/>&nbsp&nbsp&nbsp&nbsp&nbsp weight:" + hostInfo.getHostData().getWeight());
+            builder.append("<br/>&nbsp&nbsp&nbsp&nbsp&nbsp status:" + hostInfo.getHostData().getStatus());
+            builder.append("<br/><br/>");
+         }
+         builder.append("<br/>================================================================");
+      });
+      return builder.toString();
+   }
+
 }

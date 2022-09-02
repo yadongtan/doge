@@ -1,4 +1,4 @@
-package com.yadong.doge.rpc.status;
+package com.yadong.doge.registry.status;
 
 
 import org.slf4j.Logger;

@@ -18,9 +18,8 @@
     <dependencies>
         <dependency>
             <groupId>com.yadong.doge</groupId>
-            <artifactId>doge-registry</artifactId>
+            <artifactId>doge-rpc</artifactId>
             <version>1.0.0</version>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

@@ -1,13 +1,15 @@
 package com.yadong.doge.registry.config;
 
+import com.yadong.doge.utils.NameGenerateUtils;
+
+import java.util.Objects;
+
 /**
 * @author YadongTan
 * @date 2022/8/30 10:52
 * @Description 保存服务提供者的主机信息
 */
 public class HostInfo {
-
-
 
     private String host;
     private int port;
@@ -21,6 +23,14 @@ public class HostInfo {
         this.port = port;
         hostData = new HostData();
     }
+
+    public HostInfo(String hostAndPort, HostData hostData) {
+        String[] strs = hostAndPort.split(":");
+        this.host = strs[0];
+        this.port = Integer.parseInt(strs[1]);
+        this.hostData = hostData;
+    }
+
 
     public String getHostAndPort(){
         return host + ":" + port;
@@ -60,5 +70,16 @@ public class HostInfo {
         return builder.toString();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HostInfo hostInfo = (HostInfo) o;
+        return port == hostInfo.port && Objects.equals(host, hostInfo.host);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(host, port);
+    }
 }

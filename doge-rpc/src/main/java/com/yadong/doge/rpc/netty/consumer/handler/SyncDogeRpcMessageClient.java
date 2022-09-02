@@ -2,14 +2,8 @@ package com.yadong.doge.rpc.netty.consumer.handler;
 
 import com.yadong.doge.registry.monitor.MonitorFinishedRpcMark;
 import com.yadong.doge.rpc.invoker.Invoker;
-import com.yadong.doge.rpc.invoker.InvokerAndResultMap;
 import com.yadong.doge.rpc.monitor.MonitorSender;
-import com.yadong.doge.rpc.netty.monitor.MonitorNettyClient;
-import com.yadong.doge.rpc.netty.monitor.handler.SyncMonitorClient;
-import com.yadong.doge.rpc.status.RpcStatus;
-import com.yadong.doge.rpc.status.RpcStatusWatcher;
-import com.yadong.doge.utils.ObjectMapperUtils;
-import io.netty.channel.ChannelFuture;
+import com.yadong.doge.registry.status.RpcStatusWatcher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +20,7 @@ public interface SyncDogeRpcMessageClient extends DogeRpcMessageClient {
             @Override
             public Object call() throws Exception {
                 logger.info("转交给线程池异步处理");
-                RpcStatusWatcher watcher = new RpcStatusWatcher(invoker);   // 执行的记录
+                RpcStatusWatcher watcher = new RpcStatusWatcher(invoker.getHostInfo().getHostAndPort(), invoker.getMethod().getName());   // 执行的记录
                 watcher.start();
                 Object result = null;
                 try {

@@ -1,5 +1,6 @@
 package com.yadong.doge.registry.client;
 
+import com.yadong.doge.registry.config.HostData;
 import com.yadong.doge.registry.config.HostInfo;
 
 import java.lang.reflect.Method;
@@ -15,4 +16,8 @@ public interface RegistryClient {
     public List<HostInfo> getHost(Method method, Class<?> interfaceClass);
     public boolean registry(Method method, String interfaceName, HostInfo info);
     public List<HostInfo> getHost(Method method, String interfaceName);
+    public List<HostInfo> getHost(String methodName, String interfaceName);
+    public HostData getHostData(Method method, String interfaceName, HostInfo hostInfo);
+    public HostData getHostData(String key, HostInfo hostInfo);
+
 }

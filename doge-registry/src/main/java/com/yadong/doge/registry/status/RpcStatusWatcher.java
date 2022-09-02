@@ -1,11 +1,6 @@
-package com.yadong.doge.rpc.status;
+package com.yadong.doge.registry.status;
 
 
-import com.yadong.doge.rpc.invoker.Invoker;
-import org.checkerframework.checker.units.qual.A;
-
-import javax.sound.midi.SysexMessage;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
 * @author YadongTan
@@ -14,15 +9,13 @@ import java.util.concurrent.atomic.AtomicLong;
 */
 public class RpcStatusWatcher {
 
-    private final Invoker invoker;
     private final RpcStatus status;
     private long startTime;
     private long endTime;
     private long elapsed;
 
-    public RpcStatusWatcher(Invoker invoker){
-        this.status = RpcStatus.getStatus(invoker.getHostInfo().getHostAndPort(), invoker.getMethod().getName());
-        this.invoker = invoker;
+    public RpcStatusWatcher(String hostAndPort, String methodName){
+        this.status = RpcStatus.getStatus(hostAndPort, methodName);
     }
 
     // 开始远程调用时调用

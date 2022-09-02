@@ -15,10 +15,10 @@
         <module name="doge-registry" />
         <module name="doge-test-provider-2" />
         <module name="doge-test-provider-1" />
-        <module name="doge-cluster" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="doge-cluster" target="1.8" />
       <module name="doge-remoting" target="1.8" />
     </bytecodeTargetLevel>
   </component>

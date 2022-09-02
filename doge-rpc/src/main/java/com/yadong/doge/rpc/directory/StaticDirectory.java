@@ -13,8 +13,7 @@ import java.util.List;
 /**
 * @author YadongTan
 * @date 2022/9/1 1:20
-* @Description Static Directory pull from registry center
- *             which means, the directory once pull from it, the host list will never change
+* @Description 暂时先不实现
 */
 public class StaticDirectory  extends AbstractDirectory{
 
@@ -47,6 +46,21 @@ public class StaticDirectory  extends AbstractDirectory{
             return pull(invoker.getMethod(), invoker.getTargetClass());
         }
         return null;
+    }
+
+    @Override
+    public void refresh(String key) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void refresh(String key, HostInfo hostInfo) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void addHostInfo(String key, HostInfo hostInfo) {
+        throw new UnsupportedOperationException();
     }
 
 }

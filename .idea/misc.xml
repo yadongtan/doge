@@ -9,6 +9,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/doge-cluster/pom.xml" />
         <option value="$PROJECT_DIR$/doge-remoting/pom.xml" />
       </set>
     </option>

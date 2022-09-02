@@ -17,4 +17,8 @@ public interface Directory {
     //List<HostInfo> pull(Method method, String interfaceName);
     public List<HostInfo> pull(Method method, Class<?> targetClass);
     List<HostInfo> search(Invoker invoker);
+    public void refresh(String key);
+    public void refresh(String key, HostInfo hostInfo);
+    public String show();
+    public void addHostInfo(String key, HostInfo hostInfo);
 }

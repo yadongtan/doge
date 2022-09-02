@@ -61,6 +61,39 @@ public class ZookeeperRegistryClient implements RegistryClient {
         return hostInfos;
     }
 
+
+    @Override
+    public List<HostInfo> getHost(String methodName, String interfaceName) {
+        logger.info("[Zookeeper] 获取节点信息, 方法:" + methodName + "###对象:" + interfaceName);
+        String parentNode = NameGenerateUtils.generateZkNodePath(methodName, interfaceName);
+        List<String> childNode = zkCuratorUtil.getChildNode(parentNode);
+        // childNode.forEach(System.out::println);
+        List<HostInfo> hostInfos = new LinkedList<>();
+        for (String hi : childNode) {
+            String path = parentNode + "/" + hi;
+            HostInfo hostInfo = new HostInfo(hi.substring(0, hi.indexOf(":")), Integer.parseInt(hi.substring(hi.indexOf(":") + 1, hi.length())));
+            HostData hostData = ObjectMapperUtils.toObject(new String(zkCuratorUtil.getData(path)), HostData.class);
+            hostInfo.setHostData(hostData);
+            hostInfos.add(hostInfo);
+            logger.info("获取到节点信息:[" + hostInfo + "]");
+        }
+        return hostInfos;
+    }
+
+    @Override
+    public HostData getHostData(Method method, String interfaceName, HostInfo hostInfo) {
+        byte[] data = zkCuratorUtil.getData(NameGenerateUtils.generateZkNodePath(method, interfaceName) + "/" + hostInfo.getHostAndPort());
+        String json = new String(data);
+        return ObjectMapperUtils.toObject(json, HostData.class);
+    }
+
+    @Override
+    public HostData getHostData(String key, HostInfo hostInfo) {
+        byte[] data = zkCuratorUtil.getData(NameGenerateUtils.generateZkNodePathByKey(key) + "/" + hostInfo.getHostAndPort());
+        String json = new String(data);
+        return ObjectMapperUtils.toObject(json, HostData.class);
+    }
+
     @PostConstruct
     public void initInfo(){
         String path = "/doge/test1";

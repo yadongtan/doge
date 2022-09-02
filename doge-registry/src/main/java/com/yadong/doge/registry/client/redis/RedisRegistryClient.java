@@ -1,5 +1,6 @@
 package com.yadong.doge.registry.client.redis;
 
+import com.yadong.doge.registry.config.HostData;
 import com.yadong.doge.registry.config.HostInfo;
 import com.yadong.doge.registry.client.RegistryClient;
 import com.yadong.doge.registry.utils.RedisUtil;
@@ -58,6 +59,21 @@ public class RedisRegistryClient implements RegistryClient {
             logger.info("[Redis]获取到主机信息:" + hostInfo);
         }
         return hostInfos;
+    }
+
+    @Override
+    public List<HostInfo> getHost(String methodName, String interfaceName) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public HostData getHostData(Method method, String interfaceName, HostInfo hostInfo) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public HostData getHostData(String key, HostInfo hostInfo) {
+        throw new UnsupportedOperationException();
     }
 
     @PostConstruct
