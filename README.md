@@ -217,6 +217,6 @@ public class UserController {
 
 #### 参与贡献
 
-[ALL]: YadongTan
+All: YadongTan
 
 
