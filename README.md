@@ -6,6 +6,9 @@
 
 #### 软件架构
 
+运行时流程图:
+![输入图片说明](doge-config/src/main/resources/Doge%E6%9E%B6%E6%9E%84%20(1).png)
+
 本框架构建于SpringBoot基础之上, 并采用了大量的自动装配技术, 只需最简单的配置即可使用。
 
 程序运行时, 通过Spring会扫描所有的Bean, 并将其中标注了@Reference的字段进行代理注入, 代理由ServiceProxy类负责创建,在本框架中, 接口选择的Jdk动态代理, 而非接口的选择的是Cglib动态代理, 并且Cglib代理调用invoke时也未采用反射的方式(出于效率考虑)。
