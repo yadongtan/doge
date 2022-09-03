@@ -25,16 +25,22 @@
 服务提供者的信息由AbstractDirectory接口的实现类负责处理, 有DynamicDirectory和StaticDiretory(暂未完全实现)。
 
 负载均衡层由LoadBalance的五个实现类负责:
+
+```
     1. RandomLoadBalance 随机加权
     2. RoundRobinLoadBalance 加权轮训
     3. ShortestResponseLoadBalance 最短响应时间
     4. LeastActiveLoadBalance 最少活跃连接
     5. ConsistentHashLoadBalance 一致性Hash
     
+```
+
 服务调用时具体的负载均衡选择可在@DogeReference中通过loadBalance指定。
 
 服务容错层由Cluster的六个实现类负责:
 
+
+```
     1.FailoverCluster
     当出现失败时，会重试其他服务器, 会对请求做负载均衡。
 
@@ -52,6 +58,8 @@
 
     6.broadcastCluster
     广播调用所有可用的服务，任意一个节点报错则报错。
+```
+
 
 网络传输层通过实现了SyncDogeRpcMessageClient接口的子类DogeClientMessageHandler来负责, 传输时通过Netty采用异步发送, 但发送线程在发送消息等待期间获取一把锁并进入阻塞, 收到消息时被唤醒释放锁, 可返回Future对象实现异步调用。
 
@@ -59,6 +67,8 @@
 
 监控中心的数据由MonitorMap类负责, 该类记录了所有消费者的调用记录, 记录的属性有下:
 
+
+```
     private final AtomicLong total = new AtomicLong();  //总次数
     private final AtomicInteger failed = new AtomicInteger();   //失败次数
     private final AtomicLong totalElapsed = new AtomicLong();   //总响应时间
@@ -67,8 +77,12 @@
     private final AtomicLong failedMaxElapsed = new AtomicLong(); //失败的最大响应时间
     private final AtomicLong succeededMaxElapsed = new AtomicLong();    //最大成功响应时间
 
+```
+
 
 同时消费者本地也维护了一个自己的调用记录, 由RpcStatus类负责, 记录的属性有下:
+
+```
     private final AtomicInteger active = new AtomicInteger();   //计数器
     private final AtomicLong total = new AtomicLong();  //总次数
     private final AtomicInteger failed = new AtomicInteger();   //失败次数
@@ -77,6 +91,8 @@
     private final AtomicLong maxElapsed = new AtomicLong();    //最大响应时间
     private final AtomicLong failedMaxElapsed = new AtomicLong(); //失败的最大响应时间
     private final AtomicLong succeededMaxElapsed = new AtomicLong();    //最大成功响应时间
+```
+
 
 更多内容, 等你来发现...
 
