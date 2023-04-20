@@ -10,7 +10,7 @@
 ![输入图片说明](https://gitee.com/t2209931449/doge/raw/master/doge-config/src/main/resources/Doge%E6%9E%B6%E6%9E%84%20(1).png)
 
 运行时大体流程图:
-![输入图片说明]([doge-config/src/main/resources/Doge%E6%B5%81%E7%A8%8B%E5%9B%BE.png](https://gitee.com/t2209931449/doge/raw/master/doge-config/src/main/resources/Doge%E6%B5%81%E7%A8%8B%E5%9B%BE.png))
+![输入图片说明](https://gitee.com/t2209931449/doge/raw/master/doge-config/src/main/resources/Doge%E6%B5%81%E7%A8%8B%E5%9B%BE.png)
 
 本框架构建于SpringBoot基础之上, 并采用了大量的自动装配技术, 只需最简单的配置即可使用。
 
